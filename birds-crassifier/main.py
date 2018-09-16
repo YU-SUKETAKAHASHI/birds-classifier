@@ -10,7 +10,7 @@ import numpy as np
 
 classes = ["barn_swallow","crow","great_tit","japanese_white_eye","pigeon","pygmy_woodpecker","sparrow","redstart"]
 num_classes = len(classes)
-image_size = 50
+image_size = 500
 
 UPLOAD_FOLDER = "./uploads"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg','gif'])
@@ -41,15 +41,15 @@ def upload_file():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-            #model = load_model("./animal_CNN.h5")
 
-                image = Image.open(filepath) #コマンドプロンプトの第二引数からファイルを受け取る
+
+                image = Image.open(filepath) #ファイルを受け取る
                 image = image.convert("RGB") #いろいろ変換
                 image = image.resize((image_size,image_size))
                 data = np.asarray(image)
                 X = []
                 X.append(data)
-                #X = x #なんか無駄なことしてる
+                #X = x #なんか無駄なことしてるけど。
                 X = np.array(X)
 
                 result = model.predict([X])[0]
