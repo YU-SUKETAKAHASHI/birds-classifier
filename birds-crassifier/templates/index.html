@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+        <meta charset="utf-8">
+        <title>Birds Classifier</title>
+    </head>
+    <body>
+        <div class=crassifier>
+            <h1>Birds Classifier</h1>
+            <p class=sentense>鳥の画像をアップロードすると８種類のうちどれっぽいかを判定します</p>
+            <p class=kinds>(barn_swallow , crow,great_tit , japanese_white_eye , pigeon , pygmy_woodpecker , sparrow , redstart)</p>
+            <form method = post enctype = multipart/form-data>
+                <input class=select type="file" name=file>
+                <input class=upload type="submit" value="UpLoad">
+            </form>
+        </div>
+    </body>
+</html>
