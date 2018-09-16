@@ -21,16 +21,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-model = load_model('./birds_CNN.h5')#add
-graph = tf.get_default_graph()#add
+model = load_model('./birds_CNN.h5')
+graph = tf.get_default_graph()
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
-    global graph#add
-    with graph.as_default():#add
-        if request.method == 'POST':#add indent
-            if 'file' not in request.files:#add indent
-                flash('ファイルがありません')#add indent
+    global graph
+    with graph.as_default():
+        if request.method == 'POST':
+            if 'file' not in request.files:
+                flash('ファイルがありません')
                 return redirect(request.url)
             file = request.files['file']
             if file.filename == '':
@@ -43,13 +43,12 @@ def upload_file():
 
 
 
-                image = Image.open(filepath) #ファイルを受け取る
-                image = image.convert("RGB") #いろいろ変換
+                image = Image.open(filepath)
+                image = image.convert("RGB")
                 image = image.resize((image_size,image_size))
                 data = np.asarray(image)
                 X = []
                 X.append(data)
-                #X = x #なんか無駄なことしてるけど。
                 X = np.array(X)
 
                 result = model.predict([X])[0]
