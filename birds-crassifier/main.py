@@ -8,9 +8,9 @@ from PIL import Image
 import keras,sys
 import numpy as np
 
-classes = ["barn_swallow","crow","great_tit","japanese_white_eye","pigeon","pygmy_woodpecker","sparrow","redstart"]
+classes = ["ツバメ","カラス","シジュウカラ","メジロ","ハト","コゲラ","スズメ","ジョウビタキ"]
 num_classes = len(classes)
-image_size = 500
+image_size = 50
 
 UPLOAD_FOLDER = "./uploads"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg','gif'])
@@ -21,7 +21,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-model = load_model('./birds_CNN.h5')
+model = load_model('./birds_CNN1.h5')
 graph = tf.get_default_graph()
 
 @app.route('/', methods=['GET', 'POST'])
@@ -49,6 +49,7 @@ def upload_file():
                 data = np.asarray(image)
                 X = []
                 X.append(data)
+
                 X = np.array(X)
 
                 result = model.predict([X])[0]
